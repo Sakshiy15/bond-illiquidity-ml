@@ -48,7 +48,11 @@ This project builds a machine learning framework to predict whether a U.S. corpo
 | **CRSP** | Market-wide indicators |
 | **FRED** | Macroeconomic data |
 
-**Sample:** 88,025 bond-month observations · January 2018 – December 2023
+**Sample:** 88,025 bond-month observations · January 2018 – December 2023  
+**Firm data match rate:** 53.8% via CUSIP linkage. Unmatched observations 
+use cross-sectional median imputation — this attenuates firm-level feature 
+importance estimates (ROA, price-to-book). A more complete GVKEY-CUSIP 
+linkage would strengthen the firm-level dimension.
 
 ---
 
@@ -100,7 +104,10 @@ jupyter notebook bond_illiquidity_ml.ipynb
 - **Class imbalance** (~9:1 liquid:illiquid) handled via class-weight balancing
 - **SHAP** for explainability — every prediction has an economic reason, not just a number
 - **No look-ahead bias** — all predictors lagged; firm data uses public_date (announcement date)
-
+- **Firm-level merge:** 53.8% CUSIP match rate to Compustat. 
+  Remaining observations imputed with monthly cross-sectional medians. 
+  Firm fundamental SHAP values (ROA, PTB) should be interpreted as 
+  conservative lower bounds on their true predictive importance.
 ---
 
 ## References
